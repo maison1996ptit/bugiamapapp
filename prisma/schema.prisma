@@ -1,0 +1,130 @@
+generator client {
+  provider = "prisma-client-js"
+}
+
+datasource db {
+  provider = "postgresql"
+}
+
+enum Role {
+  ADMIN
+  DEPARTMENT_HEAD
+  OFFICER
+  CITIZEN
+}
+
+enum ReportStatus {
+  PENDING
+  PROCESSING
+  COMPLETED
+  REJECTED
+}
+
+enum NotificationType {
+  REPORT_UPDATE
+  TASK_ASSIGNED
+  SYSTEM_ALERT
+  BROADCAST
+}
+
+model User {
+  id            String    @id @default(cuid())
+  name          String?
+  email         String?   @unique
+  password      String?
+  emailVerified DateTime?
+  image         String?
+  role          Role      @default(CITIZEN)
+  department    String?
+  phoneNumber   String?
+  cccd          String?
+  createdAt     DateTime  @default(now())
+  updatedAt     DateTime  @updatedAt
+
+  reports       Report[]  @relation("Reporter")
+  assignedTasks Report[]  @relation("Officer")
+  notifications Notification[]
+  pushTokens    PushToken[]
+}
+
+model Report {
+  id          String       @id @default(cuid())
+  lookupCode  String       @unique
+  title       String
+  description String
+  category    String
+  latitude    Float
+  longitude   Float
+  address     String?
+  status      ReportStatus @default(PENDING)
+  feedback    String?
+  createdAt   DateTime     @default(now())
+  updatedAt   DateTime     @updatedAt
+
+  reporterId  String?
+  reporter    User?        @relation("Reporter", fields: [reporterId], references: [id])
+
+  officerId   String?
+  officer     User?        @relation("Officer", fields: [officerId], references: [id])
+
+  images      Image[]
+  auditLogs   AuditLog[]
+}
+
+model Image {
+  id        String   @id @default(cuid())
+  url       String
+  reportId  String
+  report    Report   @relation(fields: [reportId], references: [id], onDelete: Cascade)
+  createdAt DateTime @default(now())
+}
+
+model AuditLog {
+  id        String   @id @default(cuid())
+  action    String
+  note      String?
+  reportId  String
+  report    Report   @relation(fields: [reportId], references: [id], onDelete: Cascade)
+  createdAt DateTime @default(now())
+}
+
+model Notification {
+  id          String           @id @default(cuid())
+  userId      String
+  user        User             @relation(fields: [userId], references: [id], onDelete: Cascade)
+  title       String
+  body        String
+  type        NotificationType @default(SYSTEM_ALERT)
+  relatedId   String?          // e.g., reportId
+  isRead      Boolean          @default(false)
+  createdAt   DateTime         @default(now())
+}
+
+model PushToken {
+  id        String   @id @default(cuid())
+  token     String   @unique
+  userId    String
+  user      User     @relation(fields: [userId], references: [id], onDelete: Cascade)
+  device    String?  // e.g., 'web', 'android', 'ios'
+  createdAt DateTime @default(now())
+  updatedAt DateTime @updatedAt
+}
+
+model News {
+  id          String   @id @default(cuid())
+  title       String
+  content     String   @db.Text
+  category    String
+  imageUrl    String?
+  publishedAt DateTime @default(now())
+  updatedAt   DateTime @updatedAt
+}
+
+model Document {
+  id          String   @id @default(cuid())
+  title       String
+  fileUrl     String
+  fileName    String
+  uploadedAt  DateTime @default(now())
+  updatedAt   DateTime @updatedAt
+}
