@@ -70,6 +70,7 @@ export const authOptions: NextAuthOptions = {
   session: {
     strategy: "jwt",
   },
+  secret: "32_character_secret_for_nextauth_development_hardcoded",
 };
 
 const handler = NextAuth(authOptions);

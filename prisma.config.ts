@@ -8,6 +8,5 @@ export default defineConfig({
   },
   datasource: {
     url: "postgresql://postgres:d5ExmbRgh1Hemj47@db.usqtfymjbwrkyvfttrbc.supabase.co:5432/postgres",
-    directUrl: "postgresql://postgres:d5ExmbRgh1Hemj47@db.usqtfymjbwrkyvfttrbc.supabase.co:5432/postgres",
   },
 });
