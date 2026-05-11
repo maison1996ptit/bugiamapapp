@@ -4,7 +4,7 @@ const { PrismaPg } = require('@prisma/adapter-pg')
 const { PrismaClient } = require('@prisma/client')
 const bcrypt = require('bcryptjs')
 
-const pool = new Pool({ connectionString: process.env.DATABASE_URL })
+const pool = new Pool({ connectionString: "postgresql://postgres:d5ExmbRgh1Hemj47@db.usqtfymjbwrkyvfttrbc.supabase.co:5432/postgres" })
 const adapter = new PrismaPg(pool)
 const prisma = new PrismaClient({ adapter })
 
