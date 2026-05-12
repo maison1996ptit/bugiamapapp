@@ -11,7 +11,8 @@ export async function middleware(req: NextRequest) {
 
   const token = await getToken({ 
     req, 
-    secret
+    secret,
+    secureCookie: process.env.NODE_ENV === 'production'
   });
 
   // LOG 2: Token status
