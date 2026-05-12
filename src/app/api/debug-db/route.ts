@@ -11,11 +11,11 @@ export async function GET() {
     });
 
     return NextResponse.json({
-      status: "Connected",
+      status: "Connected (LOCAL STORAGE MODE)",
       userCount,
       existingUsers: users,
-      databaseHost: "ipv4.db.usqtfymjbwrkyvfttrbc.supabase.co",
-      message: "Nếu bạn thấy danh sách email ở đây, nghĩa là kết nối DB đã OK."
+      databaseHost: "Local JSON Files (data/*.json)",
+      message: "Hệ thống đang chạy chế độ lưu trữ file cục bộ để đảm bảo ổn định cho Demo."
     });
   } catch (error: any) {
     return NextResponse.json({

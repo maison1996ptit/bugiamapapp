@@ -1,0 +1,21 @@
+[
+  {
+    "id": "vdmxpe0fmxj",
+    "createdAt": "2026-05-12T00:43:07.053Z",
+    "updatedAt": "2026-05-12T00:43:07.054Z",
+    "email": "admin@mps.gov.vn",
+    "name": "Quản trị viên hệ thống",
+    "password": "$2b$10$ce4i801dw71c81RHABxKkuZmaZEiIcpVuGFzjvrEHE9b4pYTEUm4y",
+    "role": "ADMIN"
+  },
+  {
+    "id": "o7cwgvpnjg",
+    "createdAt": "2026-05-12T00:43:07.065Z",
+    "updatedAt": "2026-05-12T00:43:07.065Z",
+    "email": "officer@mps.gov.vn",
+    "name": "Cán bộ Nguyễn Văn A",
+    "password": "$2b$10$ce4i801dw71c81RHABxKkuZmaZEiIcpVuGFzjvrEHE9b4pYTEUm4y",
+    "role": "OFFICER",
+    "department": "Phòng CSGT"
+  }
+]

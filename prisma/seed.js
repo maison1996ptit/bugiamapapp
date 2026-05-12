@@ -1,12 +1,9 @@
 require('dotenv').config()
-const { Pool } = require('pg')
-const { PrismaPg } = require('@prisma/adapter-pg')
-const { PrismaClient } = require('@prisma/client')
+const { prisma } = require('../src/lib/prisma-mock')
 const bcrypt = require('bcryptjs')
 
-const pool = new Pool({ connectionString: "postgresql://postgres:d5ExmbRgh1Hemj47@ipv4.db.usqtfymjbwrkyvfttrbc.supabase.co:5432/postgres" })
-const adapter = new PrismaPg(pool)
-const prisma = new PrismaClient({ adapter })
+// Mock Pool for the seed script if needed, but since we updated prisma.ts to export a mock, 
+// and seed.js was using PrismaClient directly, we should just use the mock from prisma.ts.
 
 async function main() {
   const hashedPassword = await bcrypt.hash('admin123', 10)

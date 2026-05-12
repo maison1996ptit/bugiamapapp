@@ -74,7 +74,7 @@ export class NotificationService {
       select: { id: true },
     });
 
-    const notifications = users.map((user) => ({
+    const notifications = users.map((user: any) => ({
       userId: user.id,
       title,
       body,
@@ -96,7 +96,7 @@ export class NotificationService {
       select: { id: true },
     });
 
-    const notifications = users.map((user) => ({
+    const notifications = users.map((user: any) => ({
       userId: user.id,
       title,
       body,

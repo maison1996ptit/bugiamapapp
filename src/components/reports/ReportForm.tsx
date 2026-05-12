@@ -57,7 +57,7 @@ export default function ReportForm() {
 
   const { isLoaded } = useJsApiLoader({
     id: 'google-map-script',
-    googleMapsApiKey: "your_google_maps_key",
+    googleMapsApiKey: process.env.NEXT_PUBLIC_GOOGLE_MAPS_API_KEY || "",
     libraries: ['visualization'] as any,
   });
 

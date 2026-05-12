@@ -1,0 +1,14 @@
+[
+  {
+    "id": "epnuuekshi4",
+    "createdAt": "2026-05-12T00:43:07.066Z",
+    "updatedAt": "2026-05-12T00:43:07.066Z",
+    "lookupCode": "GT123456",
+    "title": "Lấn chiếm lòng lề đường",
+    "description": "Nhiều hộ kinh doanh bày bán hàng hóa tràn ra đường gây cản trở giao thông.",
+    "category": "traffic",
+    "latitude": 21.0285,
+    "longitude": 105.8542,
+    "status": "PENDING"
+  }
+]

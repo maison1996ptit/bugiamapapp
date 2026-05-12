@@ -1,15 +1,4 @@
-import { Pool } from 'pg'
-import { PrismaPg } from '@prisma/adapter-pg'
-import { PrismaClient } from '@prisma/client'
+// @ts-ignore
+import { prisma as mockPrisma } from './prisma-mock';
 
-const globalForPrisma = globalThis as unknown as { prisma: PrismaClient }
-
-// Sử dụng địa chỉ IPv4 trực tiếp để tránh lỗi mạng trên Vercel
-const connectionString = "postgresql://postgres:d5ExmbRgh1Hemj47@ipv4.db.usqtfymjbwrkyvfttrbc.supabase.co:5432/postgres"
-
-const pool = new Pool({ connectionString })
-const adapter = new PrismaPg(pool)
-
-export const prisma = globalForPrisma.prisma || new PrismaClient({ adapter })
-
-if (process.env.NODE_ENV !== 'production') globalForPrisma.prisma = prisma
+export const prisma = mockPrisma as any;
