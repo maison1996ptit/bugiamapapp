@@ -4,6 +4,7 @@ import { PrismaClient } from '@prisma/client'
 
 const globalForPrisma = globalThis as unknown as { prisma: PrismaClient }
 
+// Sử dụng địa chỉ IPv4 trực tiếp để tránh lỗi mạng trên Vercel
 const connectionString = "postgresql://postgres:d5ExmbRgh1Hemj47@ipv4.db.usqtfymjbwrkyvfttrbc.supabase.co:5432/postgres"
 
 const pool = new Pool({ connectionString })
