@@ -30,15 +30,11 @@ export async function middleware(req: NextRequest) {
 
   if (token) {
     console.log(`[MIDDLEWARE] SUCCESS: Token found for ${token.email}`);
-  }
- else {
+  } else {
     // LOG 3: No token - Log cookies to see if they exist
     const cookieHeader = req.headers.get('cookie') || '';
     const hasSessionCookie = cookieHeader.includes('next-auth.session-token') || cookieHeader.includes('__Secure-next-auth.session-token');
     console.log(`[MIDDLEWARE] NO TOKEN FOUND! Has session cookie: ${hasSessionCookie}`);
-    if (!hasSessionCookie) {
-      console.log(`[MIDDLEWARE] All cookies: ${cookieHeader.substring(0, 100)}...`);
-    }
   }
 
   const isAdminRoute = pathname.startsWith('/admin');
@@ -51,7 +47,6 @@ export async function middleware(req: NextRequest) {
       loginUrl.searchParams.set('callbackUrl', pathname);
       return NextResponse.redirect(loginUrl);
     }
-...
 
     const userRole = token.role as string;
 

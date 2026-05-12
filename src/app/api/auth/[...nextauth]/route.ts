@@ -81,7 +81,6 @@ export const authOptions: NextAuthOptions = {
         (session.user as any).role = token.role;
         (session.user as any).id = token.id;
         (session.user as any).department = token.department;
-  ...
 
         // Then, try to fetch fresh data from DB if possible
         try {
