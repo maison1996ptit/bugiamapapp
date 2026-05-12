@@ -1,0 +1,41 @@
+[
+  {
+    "id": "a9gmpdcmam8",
+    "createdAt": "2026-05-12T01:26:33.585Z",
+    "updatedAt": "2026-05-12T01:26:33.585Z",
+    "userId": "rim3jxngjf",
+    "title": "Chào mừng bạn đến với Hệ thống Phản ánh Công dân",
+    "body": "Chào mai son, cảm ơn bạn đã đăng ký tài khoản. Bạn có thể bắt đầu gửi phản ánh ngay bây giờ.",
+    "type": "SYSTEM_ALERT"
+  },
+  {
+    "id": "bj69uayxila",
+    "createdAt": "2026-05-12T01:26:33.595Z",
+    "updatedAt": "2026-05-12T01:26:33.595Z",
+    "userId": "vdmxpe0fmxj",
+    "title": "Người dùng mới đăng ký",
+    "body": "Người dùng mai son (maisonptit@gmail.com) vừa đăng ký tài khoản mới.",
+    "type": "BROADCAST"
+  },
+  {
+    "id": "xksiasaeh4",
+    "createdAt": "2026-05-12T01:27:04.932Z",
+    "updatedAt": "2026-05-12T01:27:04.932Z",
+    "userId": "vdmxpe0fmxj",
+    "title": "PHẢN ÁNH MỚI: Giao thông",
+    "body": "Có một phản ánh mới về \"có tai nạn giao thôn...\" tại Tọa độ: 10.78170, 106.76728 (Bù Gia Mập). Vui lòng kiểm tra và xử lý.",
+    "type": "BROADCAST",
+    "relatedId": "z869t90ph1"
+  },
+  {
+    "id": "0pstc7sd56do",
+    "createdAt": "2026-05-12T01:27:04.932Z",
+    "updatedAt": "2026-05-12T01:27:44.637Z",
+    "userId": "o7cwgvpnjg",
+    "title": "PHẢN ÁNH MỚI: Giao thông",
+    "body": "Có một phản ánh mới về \"có tai nạn giao thôn...\" tại Tọa độ: 10.78170, 106.76728 (Bù Gia Mập). Vui lòng kiểm tra và xử lý.",
+    "type": "BROADCAST",
+    "relatedId": "z869t90ph1",
+    "isRead": true
+  }
+]

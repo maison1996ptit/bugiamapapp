@@ -60,24 +60,42 @@ export const authOptions: NextAuthOptions = {
     })
   ],
   callbacks: {
-    async jwt({ token, user }) {
+    async jwt({ token, user, trigger, session }) {
       if (user) {
         token.role = (user as any).role;
         token.id = user.id;
+        token.department = (user as any).department;
       }
+      
+      // Handle manual session updates if needed
+      if (trigger === "update" && session?.role) {
+        token.role = session.role;
+      }
+      
       return token;
     },
     async session({ session, token }) {
       if (session.user) {
-        // Fetch fresh user data from DB to handle role upgrades in real-time
-        const dbUser = await prisma.user.findUnique({
-          where: { id: token.id as string },
-          select: { role: true, department: true }
-        });
-        
-        (session.user as any).role = dbUser?.role || token.role;
+        // First, populate from token which is always available
+        (session.user as any).role = token.role;
         (session.user as any).id = token.id;
-        (session.user as any).department = dbUser?.department;
+        (session.user as any).department = token.department;
+
+        // Then, try to fetch fresh data from DB if possible
+        try {
+          const dbUser = await prisma.user.findUnique({
+            where: { id: token.id as string },
+            select: { role: true, department: true }
+          });
+          
+          if (dbUser) {
+            (session.user as any).role = dbUser.role;
+            (session.user as any).department = dbUser.department;
+          }
+        } catch (error) {
+          console.error("Session callback DB error:", error);
+          // Fallback to token data already set above
+        }
       }
       return session;
     }

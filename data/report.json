@@ -10,5 +10,19 @@
     "latitude": 21.0285,
     "longitude": 105.8542,
     "status": "PENDING"
+  },
+  {
+    "id": "z869t90ph1",
+    "createdAt": "2026-05-12T01:27:04.931Z",
+    "updatedAt": "2026-05-12T01:27:04.931Z",
+    "title": "có tai nạn giao thôn...",
+    "description": "có tai nạn giao thôn",
+    "category": "Giao thông",
+    "latitude": 10.78170330019015,
+    "longitude": 106.76727544397218,
+    "address": "Tọa độ: 10.78170, 106.76728 (Bù Gia Mập)",
+    "lookupCode": "JTJVF3JY",
+    "status": "PENDING",
+    "reporterId": "rim3jxngjf"
   }
 ]

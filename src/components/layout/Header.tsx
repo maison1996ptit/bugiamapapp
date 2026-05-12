@@ -9,7 +9,8 @@ import { ShieldCheck, LogIn, LogOut, LayoutDashboard } from 'lucide-react';
 import { NotificationCenter } from './NotificationCenter';
 
 const Header = () => {
-  const { data: session } = useSession();
+  const { data: session, status } = useSession();
+  const isLoading = status === 'loading';
 
   return (
     <header className="flex flex-col w-full shadow-lg">
@@ -61,7 +62,9 @@ const Header = () => {
         </div>
 
         <div className="flex items-center space-x-2 sm:space-x-4">
-          {session ? (
+          {isLoading ? (
+            <div className="h-8 w-24 bg-slate-50 animate-pulse rounded-lg" />
+          ) : session ? (
             <div className="flex items-center gap-3">
               <NotificationCenter />
               <span className="text-xs font-semibold text-slate-500 hidden sm:inline-block">

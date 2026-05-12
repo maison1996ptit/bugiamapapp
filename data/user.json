@@ -17,5 +17,16 @@
     "password": "$2b$10$ce4i801dw71c81RHABxKkuZmaZEiIcpVuGFzjvrEHE9b4pYTEUm4y",
     "role": "OFFICER",
     "department": "Phòng CSGT"
+  },
+  {
+    "id": "rim3jxngjf",
+    "createdAt": "2026-05-12T01:26:33.584Z",
+    "updatedAt": "2026-05-12T01:26:33.584Z",
+    "name": "mai son",
+    "email": "maisonptit@gmail.com",
+    "password": "$2b$10$jTYDMRrLxlPh2qPvUZaQhOLg3UfHoMM7GjtQeN5q8XBMfsb4eDiWC",
+    "phoneNumber": "92384621",
+    "cccd": "123455345353",
+    "role": "CITIZEN"
   }
 ]
