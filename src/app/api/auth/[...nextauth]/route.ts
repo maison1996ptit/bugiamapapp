@@ -62,24 +62,26 @@ export const authOptions: NextAuthOptions = {
   callbacks: {
     async jwt({ token, user, trigger, session }) {
       if (user) {
+        console.log(`[AUTH-JWT] User logged in: ${user.email}, role: ${(user as any).role}`);
         token.role = (user as any).role;
         token.id = user.id;
         token.department = (user as any).department;
       }
-      
-      // Handle manual session updates if needed
+
       if (trigger === "update" && session?.role) {
+        console.log(`[AUTH-JWT] Trigger update, new role: ${session.role}`);
         token.role = session.role;
       }
-      
+
       return token;
     },
     async session({ session, token }) {
       if (session.user) {
-        // First, populate from token which is always available
+        console.log(`[AUTH-SESSION] Populating session for: ${session.user.email}, role in token: ${token.role}`);
         (session.user as any).role = token.role;
         (session.user as any).id = token.id;
         (session.user as any).department = token.department;
+  ...
 
         // Then, try to fetch fresh data from DB if possible
         try {
