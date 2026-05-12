@@ -7,7 +7,7 @@ export async function middleware(req: NextRequest) {
   
   const token = await getToken({ 
     req, 
-    secret: process.env.NEXTAUTH_SECRET 
+    secret: process.env.NEXTAUTH_SECRET || "bugiamap_super_secret_key_2026_mps_gov_vn" 
   });
 
   const isAdminRoute = pathname.startsWith('/admin');

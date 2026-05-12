@@ -106,7 +106,7 @@ export const authOptions: NextAuthOptions = {
   session: {
     strategy: "jwt",
   },
-  secret: process.env.NEXTAUTH_SECRET,
+  secret: process.env.NEXTAUTH_SECRET || "bugiamap_super_secret_key_2026_mps_gov_vn",
 };
 
 const handler = NextAuth(authOptions);
