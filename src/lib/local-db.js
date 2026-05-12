@@ -1,11 +1,16 @@
 const fs = require('fs');
 const path = require('path');
+const os = require('os');
 
-const DATA_DIR = path.join(process.cwd(), 'data');
+// On Vercel, we must use /tmp for any write operations
+// During local development, we use the local 'data' folder
+const DATA_DIR = process.env.VERCEL 
+  ? path.join(os.tmpdir(), 'data')
+  : path.join(process.cwd(), 'data');
 
 // Ensure data directory exists
 if (!fs.existsSync(DATA_DIR)) {
-  fs.mkdirSync(DATA_DIR);
+  fs.mkdirSync(DATA_DIR, { recursive: true });
 }
 
 const getFilePath = (model) => path.join(DATA_DIR, `${model}.json`);
@@ -13,6 +18,13 @@ const getFilePath = (model) => path.join(DATA_DIR, `${model}.json`);
 const readData = (model) => {
   const filePath = getFilePath(model);
   if (!fs.existsSync(filePath)) {
+    // If it's Vercel and file doesn't exist, try to copy from original project 'data' if it exists
+    const localPath = path.join(process.cwd(), 'data', `${model}.json`);
+    if (process.env.VERCEL && fs.existsSync(localPath)) {
+      const content = fs.readFileSync(localPath, 'utf-8');
+      fs.writeFileSync(filePath, content);
+      return JSON.parse(content);
+    }
     return [];
   }
   try {

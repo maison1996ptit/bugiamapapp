@@ -10,12 +10,21 @@ export async function GET() {
       take: 5
     });
 
+    const fs = require('fs');
+    const path = require('path');
+    const os = require('os');
+    const DATA_DIR = process.env.VERCEL 
+      ? path.join(os.tmpdir(), 'data')
+      : path.join(process.cwd(), 'data');
+
     return NextResponse.json({
       status: "Connected (LOCAL STORAGE MODE)",
       userCount,
       existingUsers: users,
-      databaseHost: "Local JSON Files (data/*.json)",
-      message: "Hệ thống đang chạy chế độ lưu trữ file cục bộ để đảm bảo ổn định cho Demo."
+      databaseHost: "Local JSON Files",
+      dataDir: DATA_DIR,
+      isVercel: !!process.env.VERCEL,
+      message: "Hệ thống đang chạy chế độ lưu trữ file cục bộ (với hỗ trợ /tmp trên Vercel)."
     });
   } catch (error: any) {
     return NextResponse.json({
