@@ -52,6 +52,7 @@ export default function LoginPage() {
               src="/logo.png" 
               alt="Logo Công An" 
               fill
+              sizes="100px"
               className="object-contain"
             />
           </div>

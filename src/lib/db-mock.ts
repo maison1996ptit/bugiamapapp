@@ -10,7 +10,7 @@ const DEFAULT_DATA: Record<string, any[]> = {
       email: 'admin@mps.gov.vn',
       name: 'Quản trị viên hệ thống',
       // admin123 hashed
-      password: '$2a$10$7R0ZfN3F/qYV1S6A2Vb/u.I.9Xw5X6v/8w6J9z8e6m2k8s7t9u0v2',
+      password: '$2b$10$ce4i801dw71c81RHABxKkuZmaZEiIcpVuGFzjvrEHE9b4pYTEUm4y',
       role: 'ADMIN',
       createdAt: new Date().toISOString(),
       updatedAt: new Date().toISOString(),
@@ -20,7 +20,7 @@ const DEFAULT_DATA: Record<string, any[]> = {
       email: 'officer@mps.gov.vn',
       name: 'Cán bộ Nguyễn Văn A',
       // admin123 hashed
-      password: '$2a$10$7R0ZfN3F/qYV1S6A2Vb/u.I.9Xw5X6v/8w6J9z8e6m2k8s7t9u0v2',
+      password: '$2b$10$ce4i801dw71c81RHABxKkuZmaZEiIcpVuGFzjvrEHE9b4pYTEUm4y',
       role: 'OFFICER',
       department: 'Phòng CSGT',
       createdAt: new Date().toISOString(),
@@ -70,13 +70,14 @@ const DEFAULT_DATA: Record<string, any[]> = {
 
 const DATA_DIR = process.env.VERCEL 
   ? path.join(os.tmpdir(), 'data')
-  : path.join(process.cwd(), 'data');
+  : path.resolve(process.cwd(), 'data');
 
 // Ensure data directory exists
 const ensureDataDir = () => {
   if (!fs.existsSync(DATA_DIR)) {
     try {
       fs.mkdirSync(DATA_DIR, { recursive: true });
+      console.log(`Created DATA_DIR at: ${DATA_DIR}`);
     } catch (e) {
       console.error('Failed to create DATA_DIR:', e);
     }
@@ -96,13 +97,23 @@ const readData = (model: string): any[] => {
   
   try {
     const content = fs.readFileSync(filePath, 'utf-8');
+    if (!content || content.trim() === '') {
+      return DEFAULT_DATA[model] || [];
+    }
+    
     const data = JSON.parse(content);
+    if (!Array.isArray(data)) {
+      console.error(`Data for ${model} is not an array, falling back to default`);
+      return DEFAULT_DATA[model] || [];
+    }
+    
     // If file is empty array, still consider returning default data for some models
     if (data.length === 0 && DEFAULT_DATA[model] && DEFAULT_DATA[model].length > 0) {
       return DEFAULT_DATA[model];
     }
     return data;
   } catch (e) {
+    console.error(`Error reading data for ${model} from ${filePath}:`, e);
     return DEFAULT_DATA[model] || [];
   }
 };
@@ -164,11 +175,28 @@ export const mockDb = {
   },
 
   findUnique: async (model: string, args: any) => {
+    console.log(`mockDb.findUnique(${model}, ${JSON.stringify(args)})`);
     const data = readData(model);
+    
     const item = data.find((item: any) => {
-      return Object.entries(args.where).every(([key, value]) => item[key] === value);
+      return Object.entries(args.where).every(([key, value]) => {
+        if (typeof value === 'string' && typeof item[key] === 'string') {
+          return item[key].trim().toLowerCase() === value.trim().toLowerCase();
+        }
+        return item[key] === value;
+      });
     });
     
+    if (item) {
+      console.log(`mockDb.findUnique: Found item with id: ${item.id}`);
+    } else {
+      console.log(`mockDb.findUnique: No item found for query:`, args.where);
+      if (model === 'user') {
+        const existingEmails = data.map((u: any) => u.email);
+        console.log(`Available emails in ${model}:`, existingEmails);
+      }
+    }
+
     if (item && args.include) {
       const newItem = { ...item };
       if (args.include.images) newItem.images = readData('image').filter(img => img.reportId === item.id);

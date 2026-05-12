@@ -67,7 +67,7 @@ export const AppActionCard = ({
   onClick: () => void
 }) => {
   return (
-    <div className="w-[320px] flex-shrink-0 pr-3">
+    <div className="w-[280px] sm:w-[320px] flex-shrink-0 pr-3">
       <AppCard 
         onClick={onClick}
         className="p-4 flex items-center h-full rounded-[16px]"
