@@ -23,7 +23,7 @@ const Footer = () => {
             <h3 className="font-[900] text-[12px] text-police-green mb-4 uppercase tracking-[0.8px]">Thông tin liên hệ</h3>
             <div className="text-[13px] space-y-2">
               <p>Địa chỉ: Trụ sở công an xã Bù Gia Mập tại thôn Bù Lư, xã Bù Gia Mập, tỉnh Đồng Nai</p>
-              <p>Điện thoại trực ban: 0982778265</p>
+              <p>Điện thoại trực ban: 02173727888</p>
             </div>
           </div>
         </div>
