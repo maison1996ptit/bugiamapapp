@@ -4,7 +4,7 @@ import { PrismaClient } from '@prisma/client'
 
 const globalForPrisma = globalThis as unknown as { prisma: PrismaClient }
 
-const connectionString = "postgresql://postgres:d5ExmbRgh1Hemj47@db.usqtfymjbwrkyvfttrbc.supabase.co:5432/postgres"
+const connectionString = "postgresql://postgres.usqtfymjbwrkyvfttrbc:d5ExmbRgh1Hemj47@aws-0-ap-southeast-1.pooler.supabase.com:5432/postgres"
 
 const pool = new Pool({ connectionString })
 const adapter = new PrismaPg(pool)

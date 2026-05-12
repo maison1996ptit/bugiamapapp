@@ -14,6 +14,7 @@ export async function GET() {
       status: "Connected",
       userCount,
       existingUsers: users,
+      databaseHost: "aws-0-ap-southeast-1.pooler.supabase.com",
       message: "Nếu bạn thấy danh sách email ở đây, nghĩa là kết nối DB đã OK."
     });
   } catch (error: any) {
