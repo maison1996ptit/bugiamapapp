@@ -54,7 +54,8 @@ const localDb = {
     }
 
     if (args.orderBy) {
-      const [field, direction] = Object.entries(args.orderBy)[0];
+      const orderBy = Array.isArray(args.orderBy) ? args.orderBy[0] : args.orderBy;
+      const [field, direction] = Object.entries(orderBy)[0];
       data.sort((a, b) => {
         if (a[field] < b[field]) return direction === 'asc' ? -1 : 1;
         if (a[field] > b[field]) return direction === 'asc' ? 1 : -1;
